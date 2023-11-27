@@ -1,5 +1,5 @@
 const express = require("express");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-core");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -14,6 +14,7 @@ const web_base_url = "https://entrackr.com/category/news";
 
 const puppeteer_options = {
   headless: "new",
+  executablePath: process.env.CHROME_BIN
 };
 
 const getData = async (website_url) => {
@@ -159,7 +160,7 @@ const getArticle = async (url) => {
 
 app.get("/", async (req, res) => {
   const lastPageNumber = await getLastPageNumber(web_base_url);
-  res.json({ lastPageNumber });
+  res.json({ lastPageNumber,ok:process.env.CHROME_BIN });
 });
 
 app.get("/page/:pageNumber", async (req, res) => {
