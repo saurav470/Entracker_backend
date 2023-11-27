@@ -1,6 +1,7 @@
 const express = require("express");
 const puppeteer = require("puppeteer-core");
 const cors = require("cors");
+const { exec } = require('child_process');
 require("dotenv").config();
 
 const app = express();
@@ -191,7 +192,17 @@ app.post("/article", async (req, res) => {
   const { heading, data } = await getArticle(url);
   res.json({ heading, data });
 });
-
+app.get('/install-chrome', (req, res) => {
+  // Run the command to install Google Chrome
+  exec('sudo apt-get install google-chrome-stable', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`Error installing Chrome: ${error.message}`);
+      return res.status(500).send('Error installing Chrome');
+    }
+    console.log(`Chrome installed successfully: ${stdout}`);
+    res.send('Chrome installed successfully');
+  });
+});
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, function () {
   console.log("Server started on port 4000");
