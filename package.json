@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install wget -y && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo dpkg -i google-chrome-stable_current_amd64.deb && sudo apt-get install -f -y && node index.js",
     "dev": "nodemon index.js",
     "build": "sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install wget -y && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && sudo dpkg -i google-chrome-stable_current_amd64.deb && sudo apt-get install -f -y && npm install"
   },
